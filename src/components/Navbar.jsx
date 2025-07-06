@@ -1,5 +1,10 @@
+
 const Navbar = () => (
-  <nav className="navbar">
+  <nav className="navbar" style={{ 
+    backgroundColor: 'transparent',
+    background: 'none',
+    border: 'none'
+  }}>
     <div className="navbar-content">
       <h1>Happy Quotes</h1>
       <div className="nav-links">

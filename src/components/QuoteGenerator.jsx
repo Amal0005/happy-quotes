@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import useQuotes from '../hooks/useQuotes';
 import QuoteCard from './QuoteCard';
+import './quote-generator-styles.css';
 
 const QuoteGenerator = () => {
-  const { loading, error, getQuoteByIndex, fetchQuotes, quoteData } = useQuotes();
+  const { loading, error: apiError, getQuoteByIndex, fetchQuotes, quoteData } = useQuotes();
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
   const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState(''); // Add error state
 
   const handleSubmit = () => {
     const index = parseInt(inputValue, 10);
@@ -20,23 +22,26 @@ const QuoteGenerator = () => {
     if (newError) {
       setQuote('');
       setAuthor('');
+      setError(newError);
     } else {
       setQuote(newQuote);
       setAuthor(newAuthor);
+      setError('');
     }
   };
 
   // Show a default message on initial load
   useEffect(() => {
-    if (!loading && !error && quoteData.length > 0) {
+    if (!loading && !apiError && quoteData.length > 0) {
       setQuote('');
       setAuthor('');
+      setError('');
     }
-  }, [loading, error, quoteData.length]);
+  }, [loading, apiError, quoteData.length]);
 
   return (
     <div className="quote-generator">
-      <div>
+      <div className="input-container fade-in">
         <input
           type="number"
           className="quote-input"

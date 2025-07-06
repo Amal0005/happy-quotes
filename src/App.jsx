@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './styles.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import QuoteGenerator from './components/QuoteGenerator';
