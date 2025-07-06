@@ -1,12 +1,14 @@
 const About = () => (
   <div className="about">
-    <h2>About Happy Quotes</h2>
-    <p>
-      Happy Quotes is designed to spread positivity. Click the "Get Random Quote" button on the Quote Generator page to receive an uplifting quote fetched from the API Ninjas Quotes API or a local backup.
-    </p>
-    <p>
-      Built with React and CSS, this app aims to make you smile, one quote at a time!
-    </p>
+    <div className="about-content">
+      <h2>About Happy Quotes</h2>
+      <p>
+This website is a small corner of the internet designed to spread positivity and motivation. With a simple interaction — entering a random number — users are presented with a thoughtful and uplifting quote.
+Each quote is meant to inspire, encourage, or bring a moment of peace to anyone who visits. Whether it's to start the day with a smile or find comfort during a difficult moment, these words are here to brighten your path.
+</p>
+      <p>
+Sometimes, a few words are all it takes to make a big difference.       </p>
+    </div>
   </div>
 );
 

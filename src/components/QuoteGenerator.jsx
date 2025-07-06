@@ -3,12 +3,20 @@ import useQuotes from '../hooks/useQuotes';
 import QuoteCard from './QuoteCard';
 
 const QuoteGenerator = () => {
-  const { loading, error, getRandomQuote, fetchQuotes, quoteData } = useQuotes();
+  const { loading, error, getQuoteByIndex, fetchQuotes, quoteData } = useQuotes();
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
-  const handleGenerateQuote = () => {
-    const { quote: newQuote, author: newAuthor, error: newError } = getRandomQuote();
+  const handleSubmit = () => {
+    const index = parseInt(inputValue, 10);
+    if (isNaN(index) || index < 0 || index >= 1000) {
+      setQuote('');
+      setAuthor('');
+      setError('Please enter a valid number between 0 and 999.');
+      return;
+    }
+    const { quote: newQuote, author: newAuthor, error: newError } = getQuoteByIndex(index);
     if (newError) {
       setQuote('');
       setAuthor('');
@@ -18,22 +26,33 @@ const QuoteGenerator = () => {
     }
   };
 
-  // Show a random quote on initial load
+  // Show a default message on initial load
   useEffect(() => {
     if (!loading && !error && quoteData.length > 0) {
-      handleGenerateQuote();
+      setQuote('');
+      setAuthor('');
     }
   }, [loading, error, quoteData.length]);
 
   return (
     <div className="quote-generator">
-      <button
-        onClick={handleGenerateQuote}
-        className="quote-button"
-        disabled={loading}
-      >
-        Get Random Quote
-      </button>
+      <div>
+        <input
+          type="number"
+          className="quote-input"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Enter 0-999"
+          disabled={loading}
+        />
+        <button
+          onClick={handleSubmit}
+          className="quote-submit"
+          disabled={loading}
+        >
+          Submit
+        </button>
+      </div>
       <QuoteCard
         quote={quote}
         author={author}
