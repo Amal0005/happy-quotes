@@ -41,7 +41,7 @@ const QuoteGenerator = () => {
 
   return (
     <div className="quote-generator">
-      <div className="input-container fade-in">
+      <div className="input-container geometric fade-in">
         <input
           type="number"
           className="quote-input"
@@ -52,7 +52,7 @@ const QuoteGenerator = () => {
         />
         <button
           onClick={handleSubmit}
-          className="quote-submit"
+          className="mini-ghost"
           disabled={loading}
         >
           Submit

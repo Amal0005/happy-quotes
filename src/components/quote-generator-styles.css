@@ -3,64 +3,454 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  padding: 2rem;
+  min-height: 100vh;
+  padding: 2rem 1rem;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
               url('https://images.unsplash.com/photo-1549633030-89d0743bad01?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   color: white;
+  position: relative;
   overflow: hidden;
+}
+.mini-ghost{
+  width: 100px;
+  height: 40px;
+  color: white;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.mini-ghost:hover{
+  border: 0;
+  background-color:rgba(128, 128, 128, 0.092);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
   position: relative;
 }
 
-.quote-generator input {
-  width: 200px;
-  padding: 1rem;
-  font-size: 1.2rem;
-  border: 2px solid #000000;
-  border-radius: 5px;
-  margin-right: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+/* Style 1 - Geometric Input */
+.input-container.geometric input {
+  width: 100%;
+  max-width: 200px;
+  padding: 1rem 1.2rem;
+  font-size: 1.1rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
   color: white;
   text-align: center;
-}
-
-.quote-generator button {
-  padding: 1rem 2rem;
-  background-color: #000000;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.2rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.quote-generator button:hover {
-  background-color: #2f2f2f;
+.input-container.geometric input:focus {
+  outline: none;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.input-container.geometric input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+}
+
+/* Style 2 - Orbital Button */
+.input-container.orbital button {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: 2px solid #000000;
+  background: transparent;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.1);
+}
+
+.input-container.orbital button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.input-container.orbital button:hover {
   transform: translateY(-2px);
 }
 
-.quote-generator button:disabled {
-  background-color: #cccccc;
+.input-container.orbital button:hover::before {
+  opacity: 1;
+}
+
+/* Style 2 - Mini Orbital Button */
+.input-container.mini-orbital button {
+  width: 100%;
+  max-width: 180px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 2px solid #2196F3;
+  background: transparent;
+  color: #2196F3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.input-container.mini-orbital button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  background: linear-gradient(45deg, transparent, rgba(33, 150, 243, 0.2), transparent);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.input-container.mini-orbital button:hover {
+  transform: translateY(-2px);
+  border-color: #1976D2;
+}
+
+.input-container.mini-orbital button:hover::before {
+  opacity: 1;
+}
+
+.input-container.mini-orbital button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(33, 150, 243, 0.1);
+}
+
+/* Retry Button Styles */
+.quote-card .retry-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.2rem;
+  border: none;
+  background: #ff990000;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-card .retry-button::before {
+  display: block;
+  font-size: 1.2rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.quote-card .retry-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.4);
+}
+
+.quote-card .retry-button:hover::before {
+  opacity: 1;
+  transform: rotate(360deg);
+}
+
+/* Disabled State for Both Buttons */
+.input-container button:disabled,
+.quote-card .retry-button:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
-}
-
-.quote-generator .quote-input {
-  margin-bottom: 1rem;
-}
-
-.quote-generator .quote-input::placeholder {
+  transform: none;
+  box-shadow: none;
+  background: rgba(0, 0, 0, 0.2);
   color: rgba(255, 255, 255, 0.5);
 }
 
-.quote-generator .quote-input:focus {
+/* Style 3 - Mini Ghost Button */
+.input-container.mini-ghost button {
+  width: 100%;
+  max-width: 150px;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.input-container.mini-ghost button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+.input-container.mini-ghost button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Style 3 - Wave Input */
+.input-container.wave input {
+  width: 100%;
+  max-width: 200px;
+  padding: 1rem 1.2rem;
+  font-size: 1.1rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 10% 100%, 0 90%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input-container.wave input:focus {
   outline: none;
-  border-color: #45a049;
+  background: rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Style 4 - Diamond Button */
+.input-container.diamond button {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: 2px solid #4CAF50;
+  background: none;
+  color: #4CAF50;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.input-container.diamond button:hover {
+  background: rgba(76, 175, 80, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Style 4 - Mini Circle Button */
+.input-container.mini-circle button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+}
+
+.input-container.mini-circle button:hover {
+  transform: translateY(-1px) scale(1.1);
+  box-shadow: 0 3px 8px rgba(76, 175, 80, 0.4);
+}
+
+/* Style 5 - Ripple Button */
+.input-container.ripple button {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: none;
+  background: #5c4caf;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.input-container.ripple button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.input-container.ripple button:hover::before {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
+}
+
+/* Style 5 - Mini Chevron Button */
+.input-container.mini-chevron button {
+  width: 100%;
+  max-width: 150px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #4CAF50;
+  background: none;
+  color: #4caaaf;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(76, 175, 80, 0.2);
+}
+
+.input-container.mini-chevron button::after {
+  content: '→';
+  position: absolute;
+  right: 1rem;
+  font-size: 1rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.input-container.mini-chevron button:hover {
+  background: rgba(76, 175, 80, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+}
+
+.input-container.mini-chevron button:hover::after {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* Style 6 - Mini Bounce Button */
+.input-container.mini-bounce button {
+  width: 100%;
+  max-width: 150px;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+}
+
+.input-container.mini-bounce button:hover {
+  animation: bounce 0.5s ease-in-out;
+  box-shadow: 0 3px 8px rgba(76, 175, 80, 0.4);
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Disabled State */
+.input-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Hover Effects */
+.input-container:hover input,
+.input-container:hover button {
+  border-color: #2b2c2c;
+}
+
+.input-container:hover input:focus {
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.quote-card {
+  max-width: 800px;
+  width: 90%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quote-card h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #4CAF50;
+}
+
+.quote-card p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.quote-card .author {
+  font-size: 1.2rem;
+  color: #4CAF50;
+  text-align: center;
 }
 
 .fade-in {
@@ -75,5 +465,40 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+  .quote-generator {
+    padding: 1.5rem;
+  }
+  
+  .quote-generator input {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+  
+  .quote-generator button {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+  
+  .quote-card {
+    width: 95%;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .quote-card h2 {
+    font-size: 1.6rem;
+  }
+  
+  .quote-card p {
+    font-size: 1.2rem;
+  }
+  
+  .quote-card .author {
+    font-size: 1rem;
   }
 }
