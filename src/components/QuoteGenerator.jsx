@@ -8,7 +8,7 @@ const QuoteGenerator = () => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState(''); // Add error state
+  const [error, setError] = useState('');
 
   const handleSubmit = () => {
     const index = parseInt(inputValue, 10);
@@ -30,7 +30,6 @@ const QuoteGenerator = () => {
     }
   };
 
-  // Show a default message on initial load
   useEffect(() => {
     if (!loading && !apiError && quoteData.length > 0) {
       setQuote('');
